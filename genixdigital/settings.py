@@ -28,10 +28,26 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-k08jgavd6c@12k5@rt@5us9f1)!#r(vge58_=#k!^o^bzor4_*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # Set to True locally, False on LIVE
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    # ------------------ LOCAL SETTINGS ------------------
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+else:
+    # ------------------ PRODUCTION (PYTHONANYWHERE) SETTINGS ------------------
+    ALLOWED_HOSTS = [
+        'tr3nchy.pythonanywhere.com',
+        'www.tr3nchy.pythonanywhere.com',
+    ]
+
+    DATABASES = {
+        'default': {
+            'NAME': 'Tr3nchy$genixhub_db',
+            'USER': 'Tr3nchy',
+            'HOST': 'Tr3nchy.mysql.pythonanywhere-services.com',
+        }
+    }
 
 # Application definition
 
@@ -77,26 +93,6 @@ WSGI_APPLICATION = 'genixdigital.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-DEBUG = True # Set to True locally, False on LIVE
-SECRET_KEY = '...' # Use environment variables for this later
-
-if DEBUG:
-    # ------------------ LOCAL SETTINGS ------------------
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # ------------------ PRODUCTION (PYTHONANYWHERE) SETTINGS ------------------
-    ALLOWED_HOSTS = [
-        'tr3nchy.pythonanywhere.com',
-        'www.tr3nchy.pythonanywhere.com',
-    ]
 
 DATABASES = {
     'default': {
