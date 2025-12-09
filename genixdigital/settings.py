@@ -27,28 +27,6 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-k08jgavd6c@12k5@rt@5us9f1)!#r(vge58_=#k!^o^bzor4_*'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # Set to True locally, False on LIVE
-
-if DEBUG:
-    # ------------------ LOCAL SETTINGS ------------------
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-else:
-    # ------------------ PRODUCTION (PYTHONANYWHERE) SETTINGS ------------------
-    ALLOWED_HOSTS = [
-        'tr3nchy.pythonanywhere.com',
-        'www.tr3nchy.pythonanywhere.com',
-    ]
-
-    DATABASES = {
-        'default': {
-            'NAME': 'Tr3nchy$genixhub_db',
-            'USER': 'Tr3nchy',
-            'HOST': 'Tr3nchy.mysql.pythonanywhere-services.com',
-        }
-    }
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,22 +69,49 @@ TEMPLATES = [
 WSGI_APPLICATION = 'genixdigital.wsgi.application'
 
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True # Set to True locally, False on LIVE
+
+if DEBUG:
+    # ------------------ LOCAL SETTINGS ------------------
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': 'genixhub_db',        
-        'USER': 'root',  
-        'PASSWORD': '30/Oct.db!MySQL.2025', 
-        'HOST': 'localhost',       
-        'PORT': '3306',            
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mysql.connector.django',
+            'NAME': 'genixhub_db',        
+            'USER': 'root',  
+            'PASSWORD': '30/Oct.db!MySQL.2025', 
+            'HOST': 'localhost',       
+            'PORT': '3306',            
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            }
         }
     }
-}
+
+else:
+    # ------------------ PRODUCTION (PYTHONANYWHERE) SETTINGS ------------------
+    ALLOWED_HOSTS = [
+        'tr3nchy.pythonanywhere.com',
+        'www.tr3nchy.pythonanywhere.com',
+    ]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mysql.connector.django',
+            'NAME': 'Tr3nchy$genixhub_db',
+            'USER': 'Tr3nchy',
+            'PASSWORD': '30/Oct.db!MySQL.2025', # <--- ENSURE THIS MATCHES THE LIVE DB PASSWORD
+            'HOST': 'Tr3nchy.mysql.pythonanywhere-services.com',
+            'PORT': '3306',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            }
+        }
+    }
 
 
 # Password validation
