@@ -1,0 +1,20 @@
+{% extends "base_app/base.html" %}
+
+    <div class="container-md"> 
+    {% block body_block %}
+
+        {% if registered %}
+            <h1>Welcome TO GDC.</h1>
+            <p>Where Endless Evolutions Meets AI Revolution</p>
+        {% else %}
+            <h1> Register Here. </h1>
+
+            <form enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        {% endif %}
+    {% endblock %}
+    </div>

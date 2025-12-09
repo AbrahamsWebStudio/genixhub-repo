@@ -1,0 +1,22 @@
+{% extends "base_app/base.html" %}
+
+    <div class="jumbotron"> 
+    {% block body_block %}
+
+        <h1>Welcome Back! </h1>
+        <h3>Kindly Login</h3>
+        I Don't Have an Account. <a class="link" href="{% url 'base_app:register' %}"> Register </a>
+
+        <form action="{% url 'base_app:user_login' %}" method="post">
+            {% csrf_token %}
+            <label for="username">Your Username:</label>
+            <input type="text" name="username" placeholder="Give a Valid Username">
+
+            <label for="password">Input Password</label>
+            <input type="password" name="password">
+
+            <button type="submit" class="btn btn-success btn-outline-info">Login</button>
+
+        </form>
+    {% endblock %}
+    </div>
