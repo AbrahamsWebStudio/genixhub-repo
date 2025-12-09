@@ -6,7 +6,7 @@ app_name = 'base_app'
 urlpatterns = [
     path('', views.index, name='index'),
     path("about/", views.about, name="about"),
-    path("services/", views.services, name="services"), 
+    path("services/", views.ServiceView.as_view(),name='services'), 
     path("registration/", views.register, name="register"), 
     path("User_login/", views.user_login, name="user_login"),  
 ]

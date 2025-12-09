@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from base_app.forms import UserForm, UserProfileForm
 
-
+from django.views.generic import View, TemplateView
 
 #LOGIN
 from django.http import HttpResponseRedirect, HttpResponse
@@ -17,9 +17,9 @@ def index(request):
 def about(request):
     return render(request, 'base_app/about.html')
 
-@login_required
-def services(request):
-    return render(request, 'base_app/services.html')
+class ServiceView(TemplateView):
+    template_name = 'base_app/services.html'
+    
 
 def register(request):
     registered = False
