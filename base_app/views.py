@@ -44,7 +44,13 @@ def register(request):
 
                 registered = True
             else:
-                print("user_form.errors, profile_form.errors")
+                print("User Form Errors:", user_form.errors)
+                print("Profile Form Errors:", profile_form.errors)
+                return render(request, 'base_app/registration.html', 
+                          {'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered})
+            
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
@@ -68,7 +74,15 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                
+                next_url = request.POST.get('next') or request.GET.get('next')
+
+                if next_url:
+                    # Redirect user back to the page they were originally trying to access
+                    return HttpResponseRedirect(next_url)
+                else:
+                    # If no 'next' parameter, redirect to the default index page
+                    return HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Account Is Not Active!")
         else:

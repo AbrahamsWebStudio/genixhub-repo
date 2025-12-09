@@ -147,4 +147,4 @@ MEDIA_URL = 'media/'
 
 
 #LOGIN URL
-LOGIN_URL = 'base_app/login/'
+LOGIN_URL = '/base_app/User_login/'
