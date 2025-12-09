@@ -78,6 +78,26 @@ WSGI_APPLICATION = 'genixdigital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+DEBUG = True # Set to True locally, False on LIVE
+SECRET_KEY = '...' # Use environment variables for this later
+
+if DEBUG:
+    # ------------------ LOCAL SETTINGS ------------------
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    # ------------------ PRODUCTION (PYTHONANYWHERE) SETTINGS ------------------
+    ALLOWED_HOSTS = [
+        'tr3nchy.pythonanywhere.com',
+        'www.tr3nchy.pythonanywhere.com',
+    ]
+
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
