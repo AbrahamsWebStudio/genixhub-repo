@@ -1,0 +1,78 @@
+{% extends "base_app/base.html" %} 
+
+{% block title %}Case Study: {{ project.name }}{% endblock %}
+
+    {% block body_block %}
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'base_app:services' %}">Services</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="mb-1 text-primary">{{ project.name }}</h1>
+                    <p class="lead text-muted">A Case Study in {{ project.get_status_display }}</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-header bg-light">
+                    Project Overview
+                </div>
+                <div class="card-body">
+                    <p>{{ project.description }}</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Client:</strong> {{ project.client }}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Timeline:</strong> {{ project.start_date|date:"M d, Y" }} &ndash; {{ project.due_date|date:"M d, Y" }}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Internal Manager:</strong> {{ project.manager.get_full_name|default:project.manager.username }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="mb-3">Detailed Process Breakdown ({{ tasks|length }} Steps)</h2>
+
+            {% if tasks %}
+                <div class="list-group">
+                {% for task in tasks %}
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        
+                        <div>
+                            <h5 class="mb-1">{{ task.title }}</h5>
+                            <p class="mb-1 text-muted small">{{ task.description|truncatechars:100 }}...</p>
+                        </div>
+
+                        <div class="text-end">
+                            <span class="badge bg-{% if task.priority == 'C' %}danger{% elif task.priority == 'H' %}warning{% else %}secondary{% endif %} me-2">
+                                Priority: {{ task.get_priority_display }}
+                            </span>
+                            <span class="badge bg-{% if task.status == 'DO' %}success{% elif task.status == 'IP' %}primary{% else %}info{% endif %}">
+                                Status: {{ task.get_status_display }}
+                            </span>
+                            <br>
+                            <small class="text-muted mt-1 d-block">Est. Time: {{ task.estimated_time }} hrs</small>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    This project has been defined, but the tasks for this case study are not yet listed.
+                </div>
+            {% endif %}
+            
+            <div class="mt-4 text-center">
+                <a href="{% url 'base_app:services' %}" class="btn btn-outline-secondary">&leftarrow; Back to All Services</a>
+            </div>
+
+        </div>
+    {% endblock %}

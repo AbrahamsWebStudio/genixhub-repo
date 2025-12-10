@@ -1,0 +1,43 @@
+{% extends "base_app/base.html" %}
+
+{% block title %}Our Services & Case Studies{% endblock %}
+
+    {% block body_block %}
+        <div class="container py-5">
+            <h1 class="text-center mb-4">Our Core Services & Featured Projects</h1>
+            <p class="text-center lead mb-5">We turn ideas into executable plans. Below are examples of our work, detailing the steps involved in each service.</p>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                
+                {% for project in projects %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h4 class="card-title text-primary">{{ project.name }}</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">Client: ~{{ project.client }}</h6>
+                                
+                                <p class="card-text">{{ project.description|truncatechars:150 }}...</p>
+
+                                <p class="small">
+                                    **Status:** <span class="badge bg-{% if project.status == 'C' %}success{% elif project.status == 'I' %}warning{% else %}secondary{% endif %}">
+                                        {{ project.get_status_display }}
+                                    </span>
+                                    <br>
+                                    **Manager:** {{ project.manager.get_full_name|default:project.manager.username }}
+                                </p>
+                                
+                                <a href='{{ project.id }}' class="btn btn-sm btn-outline-dark mt-2">
+                                    View Detailed Process & Tasks &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="alert alert-info">No services or projects are currently available for display.</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endblock %}

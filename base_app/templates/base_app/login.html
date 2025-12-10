@@ -1,25 +1,25 @@
 {% extends "base_app/base.html" %}
+{% load crispy_forms_tags %}
 
-    <div class="jumbotron"> 
+    
     {% block body_block %}
-
+        <div class="jumbotron"> 
         <h1>Welcome Back! </h1>
         <h3>Kindly Login</h3>
         I Don't Have an Account. <a class="link" href="{% url 'base_app:register' %}"> Register </a>
+        
+        <br>
 
         <form action="{% url 'base_app:user_login' %}" method="post">
             {% csrf_token %}
             {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% endif %}
-            <label for="username">Your Username:</label>
-            <input type="text" name="username" placeholder="Give a Valid Username">
+            {{ form|crispy }}
 
-            <label for="password">Input Password</label>
-            <input type="password" name="password">
-
-            <button type="submit" class="btn btn-success btn-outline-info">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
 
         </form>
+        </div>
     {% endblock %}
-    </div>
+    

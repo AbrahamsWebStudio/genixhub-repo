@@ -1,0 +1,24 @@
+{% extends "base_app/base.html" %}
+{% load crispy_forms_tags %} 
+{% block title %}Project Quote Request{% endblock %}
+
+{% block body_block %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            
+            <h2 class="mb-4">Request a Free Quote</h2>
+            <p>Tell us about your project needs using the form below. Submit this form to start your request.</p>
+            
+            <form method="POST">
+                {% csrf_token %}                
+                {# The form variable is the only context item you should rely on here #}
+                {{ form|crispy }} 
+                
+                <button type="submit" class="btn btn-primary mt-4">Submit Quote Request</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
