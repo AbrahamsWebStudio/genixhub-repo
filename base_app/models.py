@@ -5,18 +5,17 @@ from datetime import date
 from django.urls import reverse, reverse_lazy
 # Create your models here.
 class UserProfile(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    #Additional classes
-    phone_number = models.CharField(max_length=20, blank=True, default="+254")
-
-    business_type = models.CharField(max_length=150, blank=True)
-
-    profile_pic = models.ImageField(upload_to='profile_pics' , blank=True)
+    # ADDED FIELDS
+    full_name = models.CharField(max_length=255, blank=True, null=True)
+    company_name = models.CharField(max_length=255, blank=True, null=True)
+    
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    business_type = models.CharField(max_length=100, blank=True, null=True) 
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.full_name or self.user.username
 
 #CBV & LBV
 # --- CHOICES FOR PROJECT STATUS ---
@@ -137,6 +136,7 @@ class Task(models.Model):
 
 #Quote Request
 class QuoteRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quote_requests', null=True, blank=True)  
     client_name = models.CharField(max_length=100)
     client_email = models.EmailField()
     description = models.TextField(help_text="Describe the service you need.")

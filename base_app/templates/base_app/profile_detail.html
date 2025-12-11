@@ -1,0 +1,78 @@
+{% extends 'base_app/base.html' %} 
+
+{% block body_block %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h2 class="mb-0">Client Profile</h2>
+                </div>
+                
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        
+                        <div class="col-md-4 text-center mb-4 mb-md-0 border-end">
+                            {% if object.profile_pic %}
+                            <img src="{{ object.profile_pic.url }}" 
+                                 alt="{{ object.full_name }} Profile Picture" 
+                                 class="img-fluid rounded-circle border border-3 border-secondary" 
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                            {% else %}
+                            <div class="bg-light rounded-circle border border-3 border-secondary d-flex align-items-center justify-content-center mx-auto" style="width: 150px; height: 150px;">
+                                <i class="bi bi-person-fill display-4 text-muted"></i>
+                            </div>
+                            {% endif %}
+                            
+                            <p class="text-muted mt-2 small">@{{ request.user.username }}</p>
+                            
+                            <a href="{% url 'base_app:profile_update' %}" class="btn btn-sm btn-outline-primary mt-2">
+                                <i class="bi bi-pencil-square"></i> Edit Profile
+                            </a>
+                            <a href="{% url 'base_app:quote_history' %}" class="btn btn-sm btn-outline-info mt-2">
+                                <i class="bi bi-clock-history"></i> Quote History
+                            </a>
+                        </div>
+
+                        <div class="col-md-8">
+                            <h4 class="card-title text-primary mb-3">{{ object.full_name|default:"[Full Name Not Set]" }}</h4>
+                            
+                            <hr>
+                            
+                            <h5 class="mt-4 text-secondary">Business Information</h5>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-briefcase-fill me-2"></i> Company:</strong> 
+                                {{ object.company_name|default:"N/A" }}
+                            </p>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-gear-fill me-2"></i> Business Type:</strong> 
+                                {{ object.business_type|default:"N/A" }}
+                            </p>
+
+                            <h5 class="mt-4 text-secondary">Contact Information</h5>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-envelope-fill me-2"></i> Email:</strong> 
+                                {{ object.user.email|default:"N/A" }}
+                            </p>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-telephone-fill me-2"></i> Phone:</strong> 
+                                {{ object.phone_number|default:"N/A" }}
+                            </p>
+
+                            <h5 class="mt-4 text-secondary">Account Details</h5>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-person-badge-fill me-2"></i> First Name:</strong> 
+                                {{ request.user.first_name|default:"N/A" }}
+                            </p>
+                            <p class="mb-2">
+                                <strong><i class="bi bi-person-badge-fill me-2"></i> Last Name:</strong> 
+                                {{ request.user.last_name|default:"N/A" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

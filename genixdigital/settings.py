@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -173,6 +174,6 @@ MEDIA_URL = 'media/'
 
 
 #LOGIN URL
-LOGIN_URL = '/base_app/User_login/'
-LOGIN_REDIRECT_URL = '/base_app/'
+LOGIN_URL = '/base_app/login/'
+LOGIN_REDIRECT_URL = reverse_lazy('base_app:profile_detail')
 LOGOUT_REDIRECT_URL = '/base_app/'

@@ -1,8 +1,56 @@
 {% extends "base_app/base.html" %}
 {% block title %}Genix Digital | Home{% endblock %}
 
-    {% block body_block %}
-        
-        <h1>If Not GDC? Then WHo To Trust!</h1>
+{% block body_block %}
+    
+    <section class="gdc-hero-banner bg-dark text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                <div class="col-md-7">
+                    
+                    <h1 class="display-4 mb-3">
+                        If Not GDC? Then Who To Trust!
+                    </h1>
+                    
+                    <h2 class="h4 mb-4 text-warning">
+                        The Leading Specialized Firm in AI Automation, Built on Process.
+                    </h2>
+
+                    <p class="lead">
+                        Stuck in the cycle of planning without execution? Genix Digital Collectives (GDC) Kenya uses strategic analysis and AI to fix the **process first**, then automate it, ensuring every solution drives measurable **business results.**
+                    </p>
+
+                    <ul class="list-unstyled mb-5">
+                        <li class="d-flex align-items-start mb-2">
+                            <span class="text-success me-2">✅</span>
+                            We **Improve Efficiency** by eliminating procedural bottlenecks.
+                        </li>
+                        <li class="d-flex align-items-start mb-2">
+                            <span class="text-success me-2">✅</span>
+                            We **Reduce Cost** by replacing manual, repetitive tasks with reliable AI.
+                        </li>
+                        <li class="d-flex align-items-start mb-2">
+                            <span class="text-success me-2">✅</span>
+                            We **Save Time** by moving your staff from 'doing' to 'deciding.'
+                        </li>
+                    </ul>
+                    
+                    <a href="{% url 'base_app:get_quote' %}" class="btn btn-warning btn-lg shadow-lg gdc-cta-btn">
+                        🚀 Start Your Automation Journey Today!
+                    </a>
+                    
+                </div>
+                
+                <div class="col-md-5 d-none d-md-block text-center">
+                    
+                    <p class="mt-3 text-muted">
+                        *AI Automation for Operations, Customer Service, Sales, Finance, and HR.*
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     {% endblock %}

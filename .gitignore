@@ -1,0 +1,19 @@
+# Python / Django
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+.vscode/
+
+# Environment
+venv/
+env/
+*local_settings.py
+
+# Database
+db.sqlite3
+*.mysql
+
+# Media / Static Files (for local development)
+/media/
+/static_root/
